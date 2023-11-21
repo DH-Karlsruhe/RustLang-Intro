@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+	<title>Rust 🦀</title>
+
+	<link rel="stylesheet" href="dist/reset.css" />
+	<link rel="stylesheet" href="dist/reveal.css" />
+	<link rel="stylesheet" href="dist/theme/dracula.css" />
+	<!-- <link rel="stylesheet" href="dist/theme/blood.css" /> -->
+	<link rel="stylesheet" href="style.css" />
+
+	<!-- Theme used for syntax highlighted code -->
+	<link rel="stylesheet" href="plugin/highlight/monokai.css" />
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section id="start" data-auto-animate>
+				<h1>Rust 🦀</h1>
+				<p></p>
+			</section>
+			<section id="start" data-auto-animate>
+				<h1>Rust 🦀</h1>
+				<p style="font-size:0.7em;">
+					»Eine Sprache die jeden dazu bewegt <b>zuverlässige und effiziente Software</b> zu
+					schreiben.«
+				</p>
+			</section>
+			<section data-auto-animate>
+				<h2>Übersicht</h2>
+				<ol>
+					<li><span data-id="ke">Kurzgeschichte & Enterprise 🏢</span></li>
+					<li>Sprachkonzepte 👾🛟</li>
+					<li>Java♨️/🦀Rust (tradeoffs)</li>
+					<li>🦀 WASM 🕸️ Demo</li>
+					<!--li>Syntax & Semantik.. 👾</li-->
+				</ol>
+				</textarea>
+			</section>
+			<section data-auto-animate>
+				<section data-auto-animate>
+					<h3><span data-id="ke">Kurzgeschichte <br /> & Enterprise 🏢</span></h3>
+				</section>
+				<!-- Kurzgeschichte -->
+				<section>
+					<h4>Rust Historie</h4>
+					<div class="mermaid">
+						<pre>
+						%%{init: {'theme': 'dark', 'themeVariables': { 'darkMode': false }}}%%
+						timeline
+							2009 : Mozilla subventioniert zuvor privates Projekt von Graydon Hoare zum ersten Mal. 
+							2010 : Rust wird von Mozilla offiziell angekündigt.
+							2011 : `rustc` kompiliert sich erstmals selbst.
+							2015 : Rust 1.0 ✅
+							2020 : Rusts Typsicherheit wird durch Ralf Jung formal bewiesen.
+							2021 : AWS, Google, Huawei, Microsoft, Mozilla und Rust-Team gründen die `Rust Foundation`
+							November 2023: Stable Rust auf v1.74.0
+						</pre>
+					</div>
+				</section>
+				<section>
+					<h5>Wo kommt Rust nun genau her?</h5>
+
+					<img width="420" src="media/OCaml-logo.png">
+					<p><small>Der ursprüngliche Rust Compiler ist in Objective Caml geschrieben worden.<br>
+							Da OCaml🐫 selbst eine Meta-Language (ML) ist,<br>
+							wird Rust die Einordnung als <im>funktionale Programmiersprache</im> vererbt.*<br>
+						</small></p>
+					<p style="font-size:small;"><b>Funfact</b>: OCaml🐫 hatte seinen ersten Release im Jahr 1996, wie
+						Java♨️.</p>
+				</section>
+				<section>
+					<h5>Unterschiede?</h5>
+					<p> 🐫 &#8800; 🦀 </p>
+					<p><small>OCaml ist <b>interpretiert</b>, Rust ist <b style="color: tomato;">über LLVM 🐉 kompiliert</b>.<br>
+							OCaml ist <b>dynamisch typisiert</b>, Rust ist <b style="color: tomato;">statisch typisiert</b> (& Typ-inferiert).<br>
+							*OCaml ist <b>pure funktional</b>, Rust ist <b style="color: tomato;">multiparadigmatisch</b> mit funktionaler Ausrichtung.<br>
+							OCaml ist <b>eine Meta-Language</b>, Rust ist eine <b style="color: tomato;">Systemsprache</b>.<br>
+						</small></p>
+				</section>
+				<section data-auto-animate>
+					<h4>Ist Rust Enterprise rdy?</h4>
+					<p data-id="subttl">Fragen wir Tech-Unternehmen..</p>
+					<ul>
+						<li data-id="mz">Mozilla</li>
+						<li data-id="lx">Linux</li>
+						<li data-id="gl">Google</li>
+						<li data-id="ms">Microsoft</li>
+						<li data-id="cf">Cloudflare</li>
+						<li>& Co.</li>
+					</ul>
+				</section>
+
+				<section data-auto-animate>
+					<h4>Ist Rust Enterprise rdy?</h4>
+					<p data-id="subttl">Das sagen Tech-Unternehmen..</p>
+					<ul>
+						<li data-id="mz">Mozilla - <a target="_blank" href="https://wiki.mozilla.org/Oxidation">Firefox
+								Oxidation</a>
+						</li>
+						<li data-id="lx">Linux - <a target="_blank"
+								href="https://docs.kernel.org/rust/index.html">Kernel</a> </li>
+						<li data-id="gl">Google - <a target="_blank" href="https://fuchsia.dev/">FuchsiaOS</a></li>
+						<li data-id="ms">Microsoft - <a target="_blank"
+								href="https://www.theregister.com/2023/04/27/microsoft_windows_rust/">Windows Core</a>
+						</li>
+						<li data-id="cf">Cloudflare - <a target="_blank"
+								href="https://blog.cloudflare.com/how-we-built-pingora-the-proxy-that-connects-cloudflare-to-the-internet/">Pignora</a>,
+							Oxy, <a target="_blank" href="https://github.com/cloudflare/quiche">Quiche</a></li>
+						<li><a target="_blank"
+								href="https://www.figma.com/de/blog/rust-in-production-at-figma/">Figma</a>, <a
+								target="_blank"
+								href="https://discord.com/blog/why-discord-is-switching-from-go-to-rust">Discord</a>, <a
+								target="_blank"
+								href="https://aws.amazon.com/de/blogs/opensource/innovating-with-rust/">AWS</a>,...
+							<em>ja</em>.
+						</li>
+					</ul>
+				</section>
+				<section data-auto-animate>
+					<h4>Wozu ist Rust geeignet?</h4>
+					<p>Als Allzweck-Programmiersprache..</p>
+					<a target="_blank" href="https://www.rust-lang.org/what/"><img src="media/Built_it_in_Rust.png"></a>
+					<p style="font-size: large;">Eben alle <a target="_blank"
+							href="https://www.rust-lang.org/what/">Ziele und Umgebungen</a> anderer Systemsprachen
+						(C/C++)</p>
+					<p style="font-size: medium;font-style: italic;">Compile Targets: x86_46, arm, arch64, wasm, i686,
+						i586, <a target="_blank"
+							href="https://doc.rust-lang.org/nightly/rustc/platform-support.html">etc.</a> </p>
+					<!-- https://github.com/rust-embedded/awesome-embedded-rust -->
+				</section>
+			</section>
+			<!-- Sprachkonzepte -->
+			<section data-auto-animate>
+				<section id="rust_classification" data-background-video="media/Rust_Einordnung.mp4"
+					data-background-opacity="0.7" data-background-video-muted>
+					<div
+						style="background-color: rgba(20, 20, 20, 0.7);height: 20vh;width: 50vw;display: inline-flex;align-items: center;justify-content: center;">
+						<h2>Sprachkonzepte</h2>
+					</div>
+				</section>
+				<section id="SyntaxCloud">
+					<h3>Schlüsselwort-Wolke</h3>
+					<div class="gb-gradient-background" style="border-radius: 55%;">
+						<img src="./media/rust_keywords_wordcloud.png" width="80%"
+							style="transform: translateY(-30px);">
+					</div>
+				</section>
+				<section data-auto-animate>
+					<h3>Basis-Konzepte</h3>
+					<ul style="font-size: 0.8em;">
+						<li>Unveränderlichkeit ist Standard.</li>
+						<li>Genau einen <i>mut</i>able Eigentümer (<i><span data-id="ownership">Ownership</span></i>).
+						</li>
+						<li>Lifetimes/Scopes {'a {'a'b} 'a} </li>
+						<li>Ressourcenbelegung ist Initialisierung (<a
+								href="https://de.wikipedia.org/wiki/Ressourcenbelegung_ist_Initialisierung"
+								target="_blank">RAII</a>).</li>
+					</ul>
+					<p style="font-size: medium;font-style: italic;">
+						..sind hauptsächlich in Klasse "Speicher Management" |
+						<a href="https://doc.rust-lang.org/book/ch03-00-common-programming-concepts.html"
+							title="Official RustLang Book" target="_blank">
+							RustLang Buch über Common-Concepts
+						</a>
+					</p>
+				</section>
+				<section data-auto-animate>
+					<h3>Basis-Konzepte</h3>
+					<ul style="font-size: 0.8em;">
+						<li>Unveränderlichkeit ist Standard.</li>
+						<li>Genau einen <i>mut</i>able Eigentümer (<i><span data-id="ownership">Ownership</span></i>).
+						</li>
+						<li>Lifetimes/Scopes {'a {'a'b} 'a} </li>
+						<li>Ressourcenbelegung ist Initialisierung (<a
+								href="https://de.wikipedia.org/wiki/Ressourcenbelegung_ist_Initialisierung"
+								target="_blank">RAII</a>).</li>
+						<li>No-Null-Referenz: &-[immer]->Etwas</li>
+						<li><i>Pattern Matching</i></li>
+						<li>Errors 🪲 sind Werte, nichts außergewöhnliches..</li>
+						<li>Compiler & Clippy 📎<br> <small>Anti-<span
+									style="color: red;">Anti</span>-Pattern-Enforcer</small> </li>
+					</ul>
+					<p style="font-size: medium;font-style: italic;">
+						..sind hauptsächlich in Klasse "Speicher Management" |
+						<a href="https://doc.rust-lang.org/book/ch03-00-common-programming-concepts.html"
+							title="Official RustLang Book" target="_blank">
+							RustLang Buch über Common-Concepts
+						</a>
+					</p>
+				</section>
+				<section data-auto-animate>
+					<h3 data-id="ownership">Ownership</h3>
+				</section>
+				<section data-auto-animate>
+					<h3 data-id="ownership">Ownership</h3>
+					<pre data-id="ownership-example">
+					<code data-auto-animate data-trim data-line-numbers>
+					fn main() {
+						let name = String::from("Ferris the Crab 🦀")
+						let player = name;
+
+						println!("Ich bin {name}");
+					}
+					</code>
+				</pre>
+				</section>
+				<section data-auto-animate>
+					<h3>Ownership</h3>
+					<pre data-id="ownership-example"><code data-auto-animate data-trim data-line-numbers>
+					fn main() {
+						let name = String::from("Ferris the Crab 🦀")
+						let player = name;  // move name -> player
+
+						println!("Ich bin {name}");  // ❌ borrow of moved value
+					}
+					</code></pre>
+				</section>
+				<section data-auto-animate>
+					<h3>Ownership</h3>
+					<pre data-id="ownership-example"><code data-auto-animate data-trim data-line-numbers>
+					fn main() {
+						let name = String::from("Ferris the Crab 🦀")
+						let player = name.clone();  // move name -> player
+
+						println!("Ich bin {name}");  // ✅
+					}
+					</code></pre>
+				</section>
+				<section data-auto-animate>
+					<h3 data-id="borrowing">Borrowing</h3>
+					<p style="font-size: 0.6em;">Ich leih Dir das kurz zum Spielen,<br> wills aber wieder zurück haben!
+					</p>
+				</section>
+				<section data-auto-animate>
+					<h3 data-id="borrowing">Borrowing</h3>
+					<pre data-id="borrowing-example"><code data-auto-animate data-trim data-line-numbers>
+						fn main() {
+							//...
+						
+							let mut scores = vec![4, 9, 6, 2, 0];
+							let first: &i32 = scores.first().unwrap_or(&0);
+							scores.push(3); // benötigt `mut`
+						
+							println!("Erstes Ergebnis: {first}");
+						}
+						</code></pre>
+				</section>
+				<section data-auto-animate>
+					<h3 data-id="borrowing">Borrowing</h3>
+					<pre data-id="borrowing-example"><code data-auto-animate data-trim data-line-numbers>
+						fn main() {
+							//...
+						
+							let mut scores = vec![4, 9, 6, 2, 0];
+							// borrow of first value..
+							let first: &i32 = scores.first().unwrap_or(&0);
+							scores.push(3); // ❌ possible reallocation of scores
+						
+							println!("Erstes Ergebnis: {first}");
+						}
+						</code></pre>
+				</section>
+				<section data-auto-animate>
+					<h3 data-id="borrowing">Borrowing</h3>
+					<pre data-id="borrowing-example"><code data-auto-animate data-trim data-line-numbers>
+						fn main() {
+							//...
+						
+							let mut scores = vec![4, 9, 6, 2, 0];
+							scores.push(3);
+							let first: &i32 = scores.first().unwrap_or(&0);
+						
+							println!("Erstes Ergebnis: {first}"); // ..4
+						}
+						</code></pre>
+				</section>
+				<section data-auto-animate>
+					<h3 data-id="lieftimes">Lifetimes</h3>
+					<p style="font-size: 0.6em;">Alles hat ein Ende.. ☠️</p>
+				</section>
+				<section data-auto-animate>
+					<h3 data-id="lieftimes">Lifetimes</h3>
+					<pre data-id="lifetime-example"><code data-auto-animate data-trim data-line-numbers>
+						fn main() {
+							//...
+						
+							let mut scores = vec![4, 9, 6, 2, 0];
+							scores.push(3);
+							let first: &i32 = scores.first().unwrap_or(&0);
+						
+							println!("Erstes Ergebnis: {first}"); // ..4
+						}
+						</code></pre>
+				</section>
+				<section data-auto-animate>
+					<h3 data-id="lieftimes">Lifetimes</h3>
+					<pre data-id="lifetime-example"><code data-auto-animate data-trim data-line-numbers>
+						fn main() {
+							//...
+						
+							let mut scores = vec![4, 9, 6, 2, 0];
+							{
+								let first: &i32 = scores.first().unwrap_or(&0);
+								// mach irgendwas mit erstem Element..
+							}
+							scores.push(3);
+
+							println!("Erstes Ergebnis: {first}"); 
+						}
+						</code></pre>
+				</section>
+				<section data-auto-animate>
+					<h3 data-id="lieftimes">Lifetimes</h3>
+					<pre data-id="lifetime-example"><code data-auto-animate data-trim data-line-numbers>
+						fn main() {
+							//...
+						
+							let mut scores = vec![4, 9, 6, 2, 0];
+							{
+								let first: &i32 = scores.first().unwrap_or(&0);
+								// mach irgendwas mit erstem Element..
+							}
+							scores.push(3);
+
+							// ❌ `first` existiert nicht.
+							println!("Erstes Ergebnis: {first}");  
+						}
+						</code></pre>
+				</section>
+				<section data-auto-animate>
+					<h3 data-id="lieftimes">Lifetimes</h3>
+					<pre data-id="lifetime-example"><code data-auto-animate data-trim data-line-numbers>
+						fn main() {
+							//...
+						
+							let mut scores = vec![4, 9, 6, 2, 0];
+							{
+								let first: &i32 = scores.first().unwrap_or(&0);
+								// mach irgendwas mit erstem Element..
+								println!("Erstes Ergebnis: {first}");  // ✅
+								drop(first); // passiert implizit durch RAII
+							}
+							scores.push(3);
+							//...
+							println!("Ergebnisse: {:?}", scores);
+							// stdout: Ergebnisse: [4, 9, 6, 2, 0, 3]
+						}
+						</code></pre>
+				</section>
+				<section data-auto-animate>
+					<h3 data-id="lieftimes">Lifetimes <'Label> ⤴️</h3>
+					<p style="font-size: 0.6em;">Nicht alles kann zur Compile-Zeit geprüft werden .. oder?</p>
+				</section>
+				<section data-auto-animate>
+					<h3 data-id="lieftimes">Lifetimes <'Label> ⤴️</h3>
+					<pre data-id="lifetime-example"><code data-auto-animate data-trim data-line-numbers>
+						fn main() {
+							get_name(
+								true,
+								"Ferris the Crab 🦀",
+								"Ferry"
+							);
+						}
+						
+						fn get_name(
+							is_anonym: bool,
+							player: &str,
+							nickname: &str
+						) -> &str {
+							if is_anonym { nickname } else { player }
+						}
+						</code></pre>
+				</section>
+				<section data-auto-animate>
+					<h3 data-id="lieftimes">Lifetimes <'Label> ⤴️</h3>
+					<pre data-id="lifetime-example"><code data-auto-animate data-trim data-line-numbers>
+						fn main() {
+							get_name(
+								true,
+								"Ferris the Crab 🦀",
+								"Ferry"
+							);
+						}
+						// ❌ explicit lifetime required
+						fn get_name(
+							is_anonym: bool,
+							player: &str,
+							nickname: &str
+						) -> &str {
+							if is_anonym { nickname } else { player }
+						}
+						</code></pre>
+				</section>
+				<section data-auto-animate>
+					<h3 data-id="lieftimes">Lifetimes <'Label> ⤴️</h3>
+					<pre data-id="lifetime-example"><code data-auto-animate data-trim data-line-numbers>
+						fn main() {
+							get_name(
+								true,
+								"Ferris the Crab 🦀",
+								"Ferry"
+							);
+						}
+						// ✅
+						fn get_name<'lbl>(
+							is_anonym: bool,
+							player: &'lbl str,
+							nickname: &'lbl str
+						) -> &'lbl str {
+							if is_anonym { nickname } else { player }
+						}
+						</code></pre>
+				</section>
+				<section data-auto-animate>
+					<h3 data-id="lieftimes">Lifetimes <'Label> ⤴️</h3>
+					<pre data-id="lifetime-example"><code data-auto-animate data-trim data-line-numbers>
+						fn main() {
+							get_name(
+								true,
+								"Ferris the Crab 🦀",
+								"Ferry"
+							);
+						}
+						// ✅
+						fn get_name<'lbl>(
+							is_anonym: bool,
+							player: &'lbl str,
+							nickname: &'lbl str
+						) -> &'lbl str {
+							if is_anonym { nickname } else { player }
+						}
+						</code></pre>
+				</section>
+				<section data-auto-animate>
+					<h3 data-id="struct-example">Datenstrukturen</h3>
+					<p style="font-size: 0.6em;">Etwas Struktur bitte!</p>
+				</section>
+				<section data-auto-animate>
+					<h3 data-id="struct-example">Datenstrukturen - Struct/Enum</h3>
+					<pre data-id="lifetime-example"><code data-auto-animate data-trim data-line-numbers>
+						struct Player<'same> {
+							name: &'same str,
+							nickname: &'same str,
+							score: Vec&#60;i32>,
+							age: u8,
+							difficulty: &'same Difficulty,
+						}
+						
+						enum Difficulty { Easy , Normal, Hard(&'static str) }
+						enum Visibility { Public, Anonym }
+						</code></pre>
+				</section>
+				<section data-auto-animate>
+					<h3 data-id="struct-example">Datenstrukturen - Match</h3>
+					<pre data-id="lifetime-example"><code data-auto-animate data-trim data-line-numbers data-ln-start-from="11">
+						impl&#60;'same> Player&#60;'same> {
+							fn get_player(
+								&self,
+								anonymity: Visibility,
+							) -> (&'same str, i32) {
+								let overall_score = self.score.iter().sum();
+								match anonymity {
+									Visibility::Public => (&self.nickname, overall_score),
+									Visibility::Anonym => (&self.name, overall_score)
+								}
+							}
+						}
+						</code></pre>
+				</section>
+				<section data-auto-animate>
+					<h3 data-id="struct-example">Datenstrukturen - Destructuring</h3>
+					<pre data-id="lifetime-example"><code data-auto-animate data-trim data-line-numbers data-ln-start-from="23">
+						fn main() {
+							let player = Player {
+								name: "Ferris the Crab 🦀",
+								nickname: "Ferry",
+								score: vec![4, 8, 4],
+								age: 12,
+								difficulty: &Difficulty::Hard("😈"),
+							};
+						
+							let (public_name, overall_score) =
+								player.get_player(Visibility::Public);
+							println!("{public_name} hat insgesamt {overall_score} Punkte!");
+							// Ferry hat insgesamt 16 Punkte! ✅
+						}				
+						</code></pre>
+				</section>
+			</section>
+
+			<!-- Java / Rust -Tradeoffs -->
+			<section id="tradeoffs">
+				<section data-auto-animate>
+					<h2>Tradeoffs</h2>
+					<h3>Wann und Wie?</h3>
+				</section>
+				<section data-auto-animate>
+					<h2>Tradeoffs</h2>
+					<table style="font-size: 0.6em;" data-id="tradeoff_table">
+						<thead>
+							<tr>
+								<th>Frage..</th>
+								<th class="tg-0pky">Rust 🦀</th>
+								<th class="tg-0pky">| Java ♨️</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td></td>
+								<td>Speichersicher ohne GC.</td>
+								<td>Speichersicher mit GC.</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td>Zero-Cost Abstractions</td>
+								<td>Zur Laufzeit optimierender JIT</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td>Fängt Großteil der Fehler zur Compile-Zeit ab.</td>
+								<td>Fehler können behandelt werden, Laufzeitfehler werden nicht strikt verhindert.</td>
+							</tr>
+							<tr></tr>
+							<tr></tr>
+						</tbody>
+					</table>
+				</section>
+				<section data-auto-animate>
+					<h2>Tradeoffs</h2>
+					<table style="font-size: 0.6em;" data-id="tradeoff_table">
+						<thead>
+							<tr>
+								<th>Frage..</th>
+								<th>Rust 🦀</th>
+								<th>| Java ♨️</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td></td>
+								<td>Speichersicher ohne GC.</td>
+								<td>Speichersicher mit GC.</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td>Zero-Cost Abstractions</td>
+								<td>Zur Laufzeit optimierender JIT</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td>Fängt Großteil der Fehler zur Compile-Zeit ab.</td>
+								<td>Fehler können behandelt werden, Laufzeitfehler werden nicht strikt verhindert.</td>
+							</tr>
+							<tr>
+								<td>Use-Cases</td>
+								<td>General: Web, IoT, Robotik, BigData, (G|T)UI</td>
+								<td>Business: Web, Finanzen, BigData, (G|T)UI</td>
+							</tr>
+							<tr>
+								<td>Pakete &<br> Versionen 📦</td>
+								<td>Alles über integrierte CLI: <br> `cargo`, `rustup`, `rustc`</td>
+								<td>Viele SDKs & Laufzeiten (JVMs),<br> optionale Paket-Manager</td>
+							</tr>
+						</tbody>
+					</table>
+				</section>
+			</section>
+
+
+			<!-- Final slides -->
+			<section>
+				<h2>🦀 WASM 🕸️ Demo</h2>
+			</section>
+
+			<section id="final" data-background-video="media/crab_rave.mp4" data-background-opacity="0.4"
+				data-background-video-muted data-background-video-loop>
+				<div>
+					<h2>Fin.</h2>
+				</div>
+			</section>
+		</div>
+	</div>
+
+	<script src="dist/reveal.js"></script>
+	<script src="plugin/notes/notes.js"></script>
+	<script src="plugin/markdown/markdown.js"></script>
+	<script src="plugin/highlight/highlight.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/reveal.js-mermaid-plugin@2.0.0/plugin/mermaid/mermaid.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/rust.min.js"></script>
+	<script>
+		// More info about initialization & config:
+		// - https://revealjs.com/initialization/
+		// - https://revealjs.com/config/
+		Reveal.initialize({
+			hash: true,
+			showNotes: false,
+			slideNumber: true,
+			showSlideNumber: 'all',
+			// navigationMode: 'linear',
+			mermaid: {
+				// flowchart: {
+				//   curve: 'linear',
+				// },
+			},
+			plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealMermaid],
+		});
+	</script>
+</body>
+
+</html>

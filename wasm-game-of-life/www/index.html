@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>🦀🕸️ Convays Game-of-life in WASM!</title>
+    <style>
+      body {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        /* line-height: 0.7em;
+        color: rgb(87, 0, 87); */
+      }
+
+      #play-pause {
+        font-size: 2em;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- This has to be served via a WebServer, otherwise browsers wont allow WASM. -->
+    <noscript>This page contains webassembly and javascript content, please enable javascript in your browser.</noscript>
+    <canvas id="game-of-life-canvas"></canvas>
+    <button id="play-pause">⏯️</button>
+    <input type="checkbox" id="heart">Place Heart?</input>
+    <input type="checkbox" id="glider">Place Glider?</input>
+    <input type="checkbox" id="church">Place Church?</input>
+    <script src="./bootstrap.js"></script>
+  </body>
+  
+</html>

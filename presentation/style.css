@@ -1,0 +1,57 @@
+#start p {
+    transform: translateY(1em);
+    font-size: 1.4rem;
+}
+
+.gb-gradient-background {
+    background: linear-gradient(300deg, #fb0606, #ca5454, #fd6741, #fd876a, #75659c, #75659c, #75659c, #75659c);
+    background-size: 180% 180%;
+    animation: gradient-animation 15s ease infinite;
+}
+
+@keyframes gradient-animation {
+    0% {
+        background-position: 0% 0%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 0%;
+    }
+}
+
+
+
+#alien_monster {
+    display: inline;
+    margin: 0;
+    width: 3rem;
+    height: 3rem;
+    transform: translateY(.2em);
+}
+
+
+
+
+
+
+
+
+
+
+
+/* ENDE */
+
+#final {
+    background: rgba(0, 0, 0, 0.6);
+    height: 10em;
+    width: 10em;
+    border-radius: 100%;
+}
+
+#final h2 {
+    transform: translateY(1.7em);
+}
